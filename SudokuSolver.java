@@ -47,6 +47,7 @@ public class SudokuSolver {
 		   final_input = final_input.substring(0, final_input.length()-1);
 		   }catch (Exception e){
 		     System.err.println("Error: " + e.getMessage());
+		     System.exit(0);
 		   }
 	
     	SudokuState startState = new SudokuState(null);

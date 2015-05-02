@@ -11,6 +11,7 @@ public class SudokuPrinter {
     }
 
     public String printSudoku(int[][] board) {
+        
     	String toBePrinted= lineSeparator();
         for (int i = 0; i < 9; i++) {
             toBePrinted+= "|";
