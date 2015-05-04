@@ -10,14 +10,17 @@
  * ---------------------------------------------------------------------------- 
 							A* Sudoku Solver --> Solver
 
+	This project uses the A* algorithm to solve a given Sudoku puzzle. These
+	*.java files can be compiled with the provided makefile and run by typing 
+	"java Solver" in the terminal after compilation.
+	
+	The Solver requests a text file name to read the Start State to begin
+	computation. 4 Test files (easy.txt, medium.txt, hard.txt and insane.txt) 
+	are provided in the 'test' folder. These files can be loaded by entering
+ 	their names in the format : "./test/xyz.txt" after running the Solver.
+
 	This class contains the main method. 
-	
-	On compilation the Solver requests a text file name to read the Start State 
-	to begincomputation. 4 Test files (easy.txt, medium.txt, hard.txt and 
-	insane.txt) are provided in the 'test' folder. These files can be loaded by 
-	entering their names in the format : "./test/xyz.txt" after running the 
-	Solver.
-	
+		
 *  ---------------------------------------------------------------------------- 
 	chinmay.ratnaparkhi@ku.edu
 	champion@ku.edu
