@@ -1,24 +1,28 @@
 /* ----------------------------------------------------------------------------
-;	  This project is authored by 
-;     
-;	  Joseph Champion 		(2462781)	
-;     Chinmay Ratnaparkhi	(2736356)
-;
-;     EECS 649 - Project 04
-;     Dr. Frank Brown
-;     05/04/2015
-;		
-; ---------------------------------------------------------------------------- 
-;							Sudoku Solver
-;
-;	This project uses the A* algorithm to solve a given Sudoku puzzle. These
-;	*.java files can be compiled with the provided makefile and run by typing 
-;	"java SudokuSolver" in the terminal after compilation.
-;	
-;	The SudokuSolver requests a text file name to read the Start State to begin
-;	computation. 4 Test files are provided in the 
-;	
+	  This project is authored by 
+     
+	Joseph Champion 		(2462781)	
+	Chinmay Ratnaparkhi		(2736356)
 
+	EECS 649 - Project 04
+	Dr. Frank Brown
+	05/04/2015
+ * ---------------------------------------------------------------------------- 
+							A* Sudoku Solver
+
+	This project uses the A* algorithm to solve a given Sudoku puzzle. These
+	*.java files can be compiled with the provided makefile and run by typing 
+	"java SudokuSolver" in the terminal after compilation.
+	
+	The SudokuSolver requests a text file name to read the Start State to begin
+	computation. 4 Test files (easy.txt, medium.txt, hard.txt and insane.txt) 
+	are provided in the 'test' folder. These files can be loaded by entering
+ 	their names in the format : "./test/xyz.txt" after running the SudokuSolver.
+
+*  ---------------------------------------------------------------------------- 
+	chinmay.ratnaparkhi@ku.edu
+	champion@ku.edu
+*  ---------------------------------------------------------------------------- 	
 */
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -28,37 +32,38 @@ import java.util.Map;
 import java.util.Queue;
 
 
-public class AStarSearcher {
+public class AStar 
+{
 	
 	// Reference to a initial state. 
-	private SudokuState start = null;
+	private State start = null;
 	
 	// states to be visited (in a priority queue).
-	private Queue<SudokuState> frontier = new LinkedList<SudokuState>();
+	private Queue<State> frontier = new LinkedList<State>();
 	
 	
 	// map of pairs (hash code of state, reference to that state) keeping all the visited states.
-	private Map<String, SudokuState> explored = new HashMap<String, SudokuState>();
+	private Map<String, State> explored = new HashMap<String, State>();
 	
 	
 	//List of solutions found. 
-	//private List<SudokuState> solution = new LinkedList<SudokuState>();	
-	private SudokuState solution;
+	//private List<State> solution = new LinkedList<State>();	
+	private State solution;
 	
 
 	// Constructor
-	public AStarSearcher(SudokuState start) {
+	public AStarSearcher(State start) {
 		this.start = start;
 	}
 	
 	// Returns the solution
-	public SudokuState getSolution() {
+	public State getSolution() {
 		return solution;
 	}
 	
 	//Performs the A* search. 
 	public void findSolution() {
-		SudokuState currentState = start;
+		State currentState = start;
 		while (true) {
 
 			// If the puzzle is solved.
@@ -75,8 +80,8 @@ public class AStarSearcher {
 				//Generate children states
 				buildChildren(currentState);
 				System.out.println("Requested children");
-				List<SudokuState> children = currentState.getChildren();
-				for (SudokuState child : children) {
+				List<State> children = currentState.getChildren();
+				for (State child : children) {
 					if (explored.containsKey(child.getHashCode())) {
 						continue;
 					}
@@ -86,10 +91,10 @@ public class AStarSearcher {
 					}
 					else {
 						boolean isNewBetter = false;
-						SudokuState theExisting = null;
+						State theExisting = null;
 
 						//finding existing in the frontier set
-						for (SudokuState existing : frontier) {
+						for (State existing : frontier) {
 							if (existing.equals(child)) {
 								if (child.getG() < existing.getG()) {
 									isNewBetter = true;
@@ -114,7 +119,7 @@ public class AStarSearcher {
 		}
 	}
     
-    public void buildChildren(SudokuState parent) {
+    public void buildChildren(State parent) {
         int i=0, j=0, k = 0;
         for (k = 0; k < 81; k++) {
             i = k / 9;
@@ -123,9 +128,9 @@ public class AStarSearcher {
                 break;
             }
         }
-        List<SudokuState> children = new ArrayList<>();
+        List<State> children = new ArrayList<>();
         for (k = 0; k < 9; k++) {
-            SudokuState child = new SudokuState(parent);
+            State child = new State(parent);
             child.setNumber(i, j, (k + 1));
             if (child.isValid()) {
             	System.out.println("Heuristic calculation!");
