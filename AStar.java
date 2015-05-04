@@ -17,7 +17,12 @@
 	The Solver requests a text file name to read the Start State to begin
 	computation. 4 Test files (easy.txt, medium.txt, hard.txt and insane.txt) 
 	are provided in the 'test' folder. These files can be loaded by entering
- 	their names in the format : "./test/xyz.txt" after running the Solver.
+ 	their names in the format : "xyz.txt" after running the Solver, since
+ 	
+ 	The Solver searches IN THE "TEST" FOLDER BY DEFAULT.
+
+ 	If additional test files need to be added, they can be added to the "test"
+ 	folder.		
 
 *  ---------------------------------------------------------------------------- 
 	chinmay.ratnaparkhi@ku.edu
@@ -34,7 +39,7 @@ import java.util.Queue;
 
 public class AStar 
 {
-	
+
 	// Reference to a initial state. 
 	private State start = null;
 	
@@ -79,14 +84,13 @@ public class AStar
 				
 				//Generate children states
 				buildChildren(currentState);
-				System.out.println("Requested children");
+				
 				List<State> children = currentState.getChildren();
 				for (State child : children) {
 					if (explored.containsKey(child.getHashCode())) {
 						continue;
 					}
 					if (!frontier.contains(child)) {
-						System.out.println("Added child to frontier");
 						frontier.add(child);
 					}
 					else {
@@ -133,7 +137,6 @@ public class AStar
             State child = new State(parent);
             child.setNumber(i, j, (k + 1));
             if (child.isValid()) {
-            	System.out.println("Heuristic calculation!");
                 child.getHeuristic();
                 children.add(child);
             }

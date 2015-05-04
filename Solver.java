@@ -17,10 +17,12 @@
 	The Solver requests a text file name to read the Start State to begin
 	computation. 4 Test files (easy.txt, medium.txt, hard.txt and insane.txt) 
 	are provided in the 'test' folder. These files can be loaded by entering
- 	their names in the format : "./test/xyz.txt" after running the Solver.
+ 	their names in the format : "xyz.txt" after running the Solver, since
+ 	
+ 	The Solver searches IN THE "TEST" FOLDER BY DEFAULT.
 
-	This class contains the main method. 
-		
+ 	If additional test files need to be added, they can be added to the "test"
+ 	folder.		
 *  ---------------------------------------------------------------------------- 
 	chinmay.ratnaparkhi@ku.edu
 	champion@ku.edu
@@ -42,9 +44,9 @@ public class Solver {
     	 */	
     	String final_input="";
 		String read_from="";
-		System.out.print("Please enter the name of the file containing the Start State : ");
+		System.out.print("\n\nPlease enter the name of the file containing the Start State : ");
 		Scanner scanner = new Scanner(System.in);
-		read_from = scanner.nextLine();
+		read_from = "./test/" + scanner.nextLine();
 		scanner.close();
 		try{
 		    FileInputStream fstream = new FileInputStream(read_from);
@@ -84,15 +86,19 @@ public class Solver {
 
         // Perform the Timed solution Search
         begin= System.currentTimeMillis();
+        System.out.println("\n\n\tWorking...");
         solver.findSolution();
         finish = System.currentTimeMillis();
         
         // Retrieve solution from the solver and print         
         if(solver.getSolution()!=null){
+        	for(int clear = 0; clear < 50; clear++) System.out.println("\b") ;
         	System.out.println("\nSolution time " + (finish - begin) + " ms");
         	System.out.println("The most efficient solution : \n");
         	System.out.println(solver.getSolution().toString());       	
         }else{
+        	
+        	for(int clear = 0; clear < 50; clear++) System.out.println("\b") ;
         	System.out.println("The provided puzzle has no solutions.");
         }
                
