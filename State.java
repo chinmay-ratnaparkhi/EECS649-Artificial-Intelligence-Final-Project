@@ -65,10 +65,12 @@ public class State {
                     this.board[row][column] = parentSudoku[row][column];
                 }
             }
+        
+     
         }
         this.printer = new Printer();
     }
-    
+       
     // Children State Functions
     private List<State> children = null;
     public List<State> getChildren() {
@@ -81,6 +83,8 @@ public class State {
     // Sudoku Board
     private int[][] board;
     public int[][] getBoard() {
+        //Just for fun, I am going to print this state right here.
+        System.out.println(toString());
         return board;
     }
     
@@ -172,7 +176,7 @@ public class State {
 
     
     private boolean isValid(final int[][] board) {
-        
+
         // THE BOARD SIZE CHECK IS NOT NECESSARY ANY MORE SINCE THE BOARD WILL 
         // ALWAYS BE 9x9.
         // CHINMAY : I'm getting rid of this, is that okay Joe?
@@ -185,7 +189,7 @@ public class State {
             }
         }
         */
-    
+        
 
         //
         // Check each row for validity
